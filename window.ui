@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QSlider" name="horizontalSlider">
+   <widget class="QSlider" name="coolerSlider">
     <property name="geometry">
      <rect>
       <x>20</x>
