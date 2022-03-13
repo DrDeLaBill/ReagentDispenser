@@ -38,7 +38,7 @@ class Window(Ui_MainWindow):
 
     def initButtonActions(self):
         self.coolerSlider.valueChanged.connect(self.coolerSliderAction)
-        self.coolerSlider.value(0)
+        self.coolerSlider.setTickPosition(0)
         self.switchTemperature.clicked.connect(self.switchTemperatureAction)
         self.switchReagent.clicked.connect(self.switchReagentAction)
 
@@ -69,7 +69,7 @@ class Window(Ui_MainWindow):
             self.coolerInWork = True
         else:
             print("Cooler change")
-            self.coolerPWM.ChangeDutyCicle(self.coolerSlider.value())
+            self.coolerPWM.ChangeDutyCycle(self.coolerSlider.value())
 
     def switchTemperatureAction(self):
         print("switchTemperature: " + str(self.switchTemperature.dPtr.position))
@@ -81,7 +81,8 @@ class Window(Ui_MainWindow):
         controlValue = self.coolerSlider.value()
         delayTime = controlValue * constants.DISPENSER_MAX_DELAY_TIME / 100
         if controlValue > 0:
-            if self.workTime - self.dispenserCycleTime >= constants.DISPENSER_DELAY_TIME:
+            if self.workTime - self.dispenserCycleTime >= constants.DISPENSER_MAX_DELAY_TIME:
+                print("Dispenser off")
                 self.dispenserOff()
             elif not self.dispenserInWork:
                 self.dispenserCheckDelay(delayTime)
@@ -91,14 +92,13 @@ class Window(Ui_MainWindow):
     def dispenserCheckDelay(self, delayTime):
         print("Check delay")
         if self.workTime >= delayTime + self.dispenserCycleTime:
+            print("Dispenser on")
             self.dispenserOn()
 
     def dispenserOn(self):
-        print("Dispenser on")
         self.dispenserInWork = True
 
     def dispenserOff(self):
-        print("Dispenser off")
         self.dispenserCycleTime = time()
         self.dispenserInWork = False
 
