@@ -5,8 +5,7 @@ from time import time
 import RPi.GPIO as GPIO
 from PyQt5 import QtCore, QtWidgets
 
-from constants import COOLER_GPIO_PWM_PIN, COOLER_PWM_FREQ, DISPENSER_DELAY_TIME, \
-    DISPENSER_MAX_DELAY_TIME, DISPENSER_GPIO_PIN
+import constants
 from switch import Switch
 from window import Ui_MainWindow
 
@@ -47,10 +46,10 @@ class Window(Ui_MainWindow):
         GPIO.cleanup()
         GPIO.setmode(GPIO.BCM)
         # Cooler settings
-        GPIO.setup(COOLER_GPIO_PWM_PIN, GPIO.OUT)
-        self.coolerPWM = GPIO.PWM(COOLER_GPIO_PWM_PIN, COOLER_PWM_FREQ)
+        GPIO.setup(constants.COOLER_GPIO_PWM_PIN, GPIO.OUT)
+        self.coolerPWM = GPIO.PWM(constants.COOLER_GPIO_PWM_PIN, constants.COOLER_PWM_FREQ)
         # Dispenser
-        GPIO.setup(DISPENSER_GPIO_PIN, GPIO.OUT)
+        GPIO.setup(constants.DISPENSER_GPIO_PIN, GPIO.OUT)
 
     def loopUi(self):
         # GPIO actions
@@ -80,9 +79,9 @@ class Window(Ui_MainWindow):
 
     def checkDispenserWorkTime(self):
         controlValue = self.coolerSlider.value()
-        delayTime = controlValue * DISPENSER_MAX_DELAY_TIME / 100
+        delayTime = controlValue * constants.DISPENSER_MAX_DELAY_TIME / 100
         if controlValue > 0:
-            if self.workTime - self.dispenserCycleTime >= DISPENSER_DELAY_TIME:
+            if self.workTime - self.dispenserCycleTime >= constants.DISPENSER_DELAY_TIME:
                 self.dispenserOff()
             elif not self.dispenserInWork:
                 self.dispenserCheckDelay(delayTime)
