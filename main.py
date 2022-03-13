@@ -17,6 +17,7 @@ class Window(Ui_MainWindow):
         self.coolerInWork = False
         # Dispenser
         self.dispenserInWork = False
+        self.dispenserEnable = False
         self.dispenserCycleTime = time()
         self.dispenserDelayTime = 0
         # Main
@@ -76,31 +77,35 @@ class Window(Ui_MainWindow):
 
     def switchReagentAction(self):
         print("switchReagent: " + str(self.switchReagent.dPtr.position))
+        if self.switchReagent.dPtr.position:
+            self.dispenserEnable = False
+        else:
+            self.dispenserEnable = True
 
     def checkDispenserWorkTime(self):
-        controlValue = self.coolerSlider.value()
-        delayTime = controlValue * constants.DISPENSER_MAX_DELAY_TIME / 100
-        if controlValue > 0:
+        if self.coolerSlider.value() > 0 and self.dispenserEnable:
             if self.workTime - self.dispenserCycleTime >= constants.DISPENSER_MAX_DELAY_TIME:
                 print("Dispenser off")
                 self.dispenserOff()
             elif not self.dispenserInWork:
-                self.dispenserCheckDelay(delayTime)
+                self.dispenserCheckDelay()
         else:
             self.dispenserOff()
 
-    def dispenserCheckDelay(self, delayTime):
-        print("Check delay")
+    def dispenserCheckDelay(self):
+        delayTime = self.coolerSlider.value() * constants.DISPENSER_MAX_DELAY_TIME / 100
         if self.workTime >= delayTime + self.dispenserCycleTime:
             print("Dispenser on")
             self.dispenserOn()
 
     def dispenserOn(self):
         self.dispenserInWork = True
+        GPIO.output(constants.DISPENSER_GPIO_PIN, GPIO.HIGH)
 
     def dispenserOff(self):
         self.dispenserCycleTime = time()
         self.dispenserInWork = False
+        GPIO.output(constants.DISPENSER_GPIO_PIN, GPIO.LOW)
 
 
 if __name__ == "__main__":
