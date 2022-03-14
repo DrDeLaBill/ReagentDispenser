@@ -84,7 +84,7 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "max"))
         self.label_4.setText(_translate("MainWindow", "Распылитель"))
         self.label_5.setText(_translate("MainWindow", "Измерение температуры"))
-        self.label_6.setText(_translate("MainWindow", "+27°C"))
+        self.label_6.setText(_translate("MainWindow", "--°C"))
         self.label_7.setText(_translate("MainWindow", "Низкий уровень жидкости"))
         self.label_8.setText(_translate("MainWindow", "Уровень жидкости"))
         self.label_9.setText(_translate("MainWindow", "23 мм"))
