@@ -148,6 +148,7 @@ class Window(Ui_MainWindow):
 
     def checkDistanceSensor(self):
         if self.isSmallDistance():
+            print("Small distance: " + str(self.getDistance()))
             self.dispenserTurnOn()
 
     def checkTemperature(self):
