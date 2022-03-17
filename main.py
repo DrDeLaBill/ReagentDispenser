@@ -148,7 +148,6 @@ class Window(Ui_MainWindow):
 
     def checkDistanceSensor(self):
         if self.isSmallDistance():
-            print("Small distance: " + str(self.getDistance()))
             self.dispenserTurnOn()
 
     def checkTemperature(self):
@@ -163,9 +162,12 @@ class Window(Ui_MainWindow):
     def getTemperature(self):
         bus = SMBus(1)
         sensor = MLX90614(bus, address=constants.TEMPERATURE_SENSOR_CHANNEL)
-        temperature = sensor.get_object_1()
-        bus.close()
-        return temperature
+        try:
+            temperature = sensor.get_object_1()
+            bus.close()
+            return temperature
+        except Exception:
+            return "ERR"
 
     def checkLiquidLevel(self):
         mainTankState = GPIO.input(constants.LIQUID_MAIN_TANK_PIN) == 1
