@@ -84,10 +84,10 @@ class Ui_MainWindow(object):
         # Password window
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(
-            350,
-            230,
-            constants.SCREEN_WIDTH / 2 - 175,
-            constants.SCREEN_HIGH / 2 - 115,
+            constants.SCREEN_WIDTH / 2 - 300,
+            constants.SCREEN_HIGH / 2 - 85,
+            600,
+            170
         ))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
