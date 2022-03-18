@@ -17,7 +17,7 @@ from switch import Switch
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(constants.SCREEN_WIDTH, constants.SCREEN_HIGH)
+        MainWindow.resize(constants.SCREEN_HIGH, constants.SCREEN_WIDTH)
         # Main window
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -84,8 +84,8 @@ class Ui_MainWindow(object):
         # Password window
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(
-            (constants.SCREEN_WIDTH // 2) - 300,
-            (constants.SCREEN_HIGH // 2) - 85,
+            (constants.SCREEN_WIDTH // 2) - 85,
+            (constants.SCREEN_HIGH // 2) - 300,
             600,
             170
         ))

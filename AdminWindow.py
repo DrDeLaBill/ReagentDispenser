@@ -71,7 +71,7 @@ class Window(Ui_MainWindow):
                 self.checkDistanceSensor()
 
     def auth(self):
-        if self.lineEdit.getText() == constants.PASSWORD:
+        if self.lineEdit.text() == constants.PASSWORD:
             self.isAuth = True
             self.showMainWindow()
 
