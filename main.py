@@ -39,6 +39,9 @@ class Window(Ui_MainWindow):
         self.loop.start()
         print('loop start')
 
+    def __del__(self):
+        self.loop.terminate()
+
     def initButtonActions(self):
         self.coolerSlider.valueChanged.connect(self.coolerSliderAction)
         self.coolerSlider.setTickPosition(0)
@@ -175,7 +178,7 @@ class Window(Ui_MainWindow):
             GPIO.output(constants.LIQUID_PUMP_PIN, GPIO.LOW)
         elif GPIO.input(constants.LIQUID_EMPTY_PIN) == 1 and mainTankState:
             GPIO.output(constants.LIQUID_PUMP_PIN, GPIO.HIGH)
-        elif not mainTankState:
+        elif mainTankState:
             self.label_7.show()
         else:
             self.label_7.hide()
