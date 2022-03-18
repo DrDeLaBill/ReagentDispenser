@@ -25,11 +25,6 @@ class Window(Ui_MainWindow):
         self.workTime = time.time()
 
         Ui_MainWindow.setupUi(self, MainWindow)
-        self.switchReagent = Switch(MainWindow)
-        self.switchTemperature = Switch(MainWindow)
-        self.switchReagent.setGeometry(QtCore.QRect(360, 150, 75, 31))
-        self.switchTemperature.setGeometry(QtCore.QRect(360, 210, 75, 31))
-        self.label_7.hide()
 
         self.setupGPIO()
         self.initButtonActions()
@@ -182,11 +177,3 @@ class Window(Ui_MainWindow):
             self.label_7.show()
         else:
             self.label_7.hide()
-
-    def showPassword(self):
-        self.centralwidgetChild.hide()
-        self.verticalLayoutWidget.show()
-
-    def showMainWindow(self):
-        self.verticalLayout.hide()
-        self.centralwidgetChild.show()
