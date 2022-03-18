@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+import constants
 from switch import Switch
 
 
@@ -82,7 +83,12 @@ class Ui_MainWindow(object):
 
         # Password window
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(350, 230, 581, 161))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(
+            350,
+            230,
+            constants.SCREEN_WIDTH / 2 - 175,
+            constants.SCREEN_HIGH / 2 - 115,
+        ))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -92,7 +98,7 @@ class Ui_MainWindow(object):
         font.setPointSize(30)
         self.label_10.setFont(font)
         self.label_10.setObjectName("label")
-        self.verticalLayout.addWidget(self.label)
+        self.verticalLayout.addWidget(self.label_10)
         self.textEdit = QtWidgets.QTextEdit(self.verticalLayoutWidget)
         self.textEdit.setObjectName("textEdit")
         self.verticalLayout.addWidget(self.textEdit)
@@ -102,14 +108,6 @@ class Ui_MainWindow(object):
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
         self.verticalLayout.addWidget(self.pushButton)
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1280, 21))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)

@@ -23,6 +23,7 @@ class Window(Ui_MainWindow):
         self.dispenserDelayTime = 0
         # Main
         self.workTime = time.time()
+        self.isAuth = False
 
         Ui_MainWindow.setupUi(self, MainWindow)
 
@@ -32,7 +33,8 @@ class Window(Ui_MainWindow):
         self.loop = threading.Thread(target=self.loopUi, args=())
         self.loop.start()
         print('loop start')
-        self.showMainWindow()
+
+        self.showPassword()
 
     def __del__(self):
         self.loop.terminate()
@@ -42,6 +44,7 @@ class Window(Ui_MainWindow):
         self.coolerSlider.setTickPosition(0)
         self.switchTemperature.clicked.connect(self.switchTemperatureAction)
         self.switchReagent.clicked.connect(self.switchReagentAction)
+        self.pushButton.clicked.connect(self.auth)
 
     def setupGPIO(self):
         GPIO.cleanup()
@@ -63,10 +66,16 @@ class Window(Ui_MainWindow):
     def loopUi(self):
         # GPIO actions
         while True:
-            self.workTime = time.time()
-            self.checkTemperature()
-            self.checkLiquidLevel()
-            self.checkDistanceSensor()
+            if self.isAuth:
+                self.workTime = time.time()
+                self.checkTemperature()
+                self.checkLiquidLevel()
+                self.checkDistanceSensor()
+
+    def auth(self):
+        if self.textEdit.value() == constants.PASSWORD:
+            self.isAuth = True
+            self.showMainWindow()
 
     def coolerSliderAction(self):
         print("Slider: " + str(self.coolerSlider.value()))
