@@ -1,6 +1,6 @@
 # App settings
-SCREEN_HIGH = 1280
-SCREEN_WIDTH = 720
+SCREEN_HIGH = 854
+SCREEN_WIDTH = 480
 PASSWORD = 1234
 
 # Cooler settings

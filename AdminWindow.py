@@ -2,12 +2,10 @@ import threading
 import time
 
 import RPi.GPIO as GPIO
-from PyQt5 import QtCore
 from smbus2 import SMBus
 from mlx90614 import MLX90614
 
 import constants
-from switch import Switch
 from BaseAdminWindow import Ui_MainWindow
 
 
@@ -73,7 +71,7 @@ class Window(Ui_MainWindow):
                 self.checkDistanceSensor()
 
     def auth(self):
-        if self.textEdit.value() == constants.PASSWORD:
+        if self.lineEdit.getText() == constants.PASSWORD:
             self.isAuth = True
             self.showMainWindow()
 

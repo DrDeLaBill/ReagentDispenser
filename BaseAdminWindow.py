@@ -17,7 +17,7 @@ from switch import Switch
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(854, 480)
+        MainWindow.resize(constants.SCREEN_WIDTH, constants.SCREEN_HIGH)
         # Main window
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -84,8 +84,8 @@ class Ui_MainWindow(object):
         # Password window
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(
-            constants.SCREEN_WIDTH / 2 - 300,
-            constants.SCREEN_HIGH / 2 - 85,
+            (constants.SCREEN_WIDTH // 2) - 300,
+            (constants.SCREEN_HIGH // 2) - 85,
             600,
             170
         ))
@@ -99,9 +99,10 @@ class Ui_MainWindow(object):
         self.label_10.setFont(font)
         self.label_10.setObjectName("label")
         self.verticalLayout.addWidget(self.label_10)
-        self.textEdit = QtWidgets.QTextEdit(self.verticalLayoutWidget)
-        self.textEdit.setObjectName("textEdit")
-        self.verticalLayout.addWidget(self.textEdit)
+        self.lineEdit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        self.lineEdit.setFont(font)
+        self.lineEdit.setObjectName("lineEdit")
+        self.verticalLayout.addWidget(self.lineEdit)
         self.pushButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(25)
@@ -144,12 +145,12 @@ class Ui_MainWindow(object):
         
         self.label_10.show()
         self.pushButton.show()
-        self.textEdit.show()
+        self.lineEdit.show()
 
     def showMainWindow(self):
         self.label_10.hide()
         self.pushButton.hide()
-        self.textEdit.hide()
+        self.lineEdit.hide()
 
         self.label.show()
         self.label_2.show()
@@ -163,12 +164,3 @@ class Ui_MainWindow(object):
         self.coolerSlider.show()
         self.switchTemperature.show()
         self.switchReagent.show()
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
