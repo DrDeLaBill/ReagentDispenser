@@ -1,6 +1,7 @@
 # App settings
 SCREEN_HIGH = 1280
 SCREEN_WIDTH = 720
+PASSWORD = 1234
 
 # Cooler settings
 COOLER_GPIO_PWM_PIN = 19
