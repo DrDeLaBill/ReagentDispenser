@@ -38,14 +38,14 @@ class UserWindow(Ui_MainWindow):
             self.showMainScreen()
 
     def checkUserTemperature(self):
-        if self.isAlertTemperature() and not self.isSecondMesurement():
+        if self.isAlertTemperature() and not self.isDelayTime():
             self.showWarningScreen()
         elif self.isAlertTemperature():
             self.showAlertScreen()
         else:
             self.showSuccesScreen()
 
-    def isSecondMesurement(self):
+    def isDelayTime(self):
         return time.time() - self.delayTime < constants.TEMPERATURE_DELAY
 
     def isAlertTemperature(self):
@@ -55,20 +55,29 @@ class UserWindow(Ui_MainWindow):
         return temperature > constants.TEMPERATURE_MAX_VALUE
 
     def showMainScreen(self):
-        self.hideAll()
+        self.warningBox.hide()
+        self.alertBox.hide()
+        self.successBox.hide()
         self.mainBox.show()
 
     def showWarningScreen(self):
-        self.hideAll()
+        self.mainBox.hide()
+        self.alertBox.hide()
+        self.successBox.hide()
         self.delayTime = time.time()
         self.warningBox.show()
 
     def showAlertScreen(self):
-        self.hideAll()
+        self.mainBox.hide()
+        self.warningBox.hide()
+        self.successBox.hide()
         self.alertBox.show()
 
     def showSuccesScreen(self):
-        self.hideAll()
+        self.mainBox.hide()
+        self.warningBox.hide()
+        self.alertBox.hide()
+        self.delayTime = time.time()
         self.successBox.show()
 
     def hideAll(self):
