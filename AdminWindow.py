@@ -199,6 +199,8 @@ class AdminWindow(Ui_MainWindow):
 
     @staticmethod
     def getTemperature():
+        if AdminWindow.temperature < constants.TEMPERATURE_MIN_VALUE:
+            return False
         return AdminWindow.temperature
 
     @staticmethod

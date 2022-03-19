@@ -49,7 +49,10 @@ class UserWindow(Ui_MainWindow):
         return time.time() - self.delayTime < constants.TEMPERATURE_DELAY
 
     def isAlertTemperature(self):
-        return AdminWindow.getTemperature() > constants.TEMPERATURE_MAX_VALUE
+        temperature = AdminWindow.getTemperature()
+        if not temperature:
+            return False
+        return temperature > constants.TEMPERATURE_MAX_VALUE
 
     def showMainScreen(self):
         self.hideAll()
