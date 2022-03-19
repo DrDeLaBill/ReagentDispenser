@@ -9,7 +9,11 @@ import constants
 from BaseAdminWindow import Ui_MainWindow
 
 
-class Window(Ui_MainWindow):
+class AdminWindow(Ui_MainWindow):
+    temperature = 0.0
+    distance = 0.0
+    workStatus = False
+
     def setupUi(self, MainWindow):
         # Cooler
         self.coolerPWM = None
@@ -60,6 +64,7 @@ class Window(Ui_MainWindow):
         GPIO.setup(constants.LIQUID_EMPTY_PIN, GPIO.OUT)
         GPIO.setup(constants.LIQUID_MAIN_TANK_PIN, GPIO.OUT)
         GPIO.setup(constants.LIQUID_PUMP_PIN, GPIO.IN)
+        self.workStatus = True
 
     def loopUi(self):
         # GPIO actions
@@ -149,6 +154,7 @@ class Window(Ui_MainWindow):
         # and divide by 2, because there and back
         distance = (TimeElapsed * 34300) / 2
 
+        self.distance = distance
         return distance
 
     def checkDistanceSensor(self):
@@ -170,6 +176,7 @@ class Window(Ui_MainWindow):
         try:
             temperature = sensor.get_object_1()
             bus.close()
+            self.temperature = temperature
             return temperature
         except Exception:
             return "ERR"

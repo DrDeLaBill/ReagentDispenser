@@ -25,3 +25,10 @@ LIQUID_MAIN_TANK_PIN = 20
 
 # Temperature sensor
 TEMPERATURE_SENSOR_CHANNEL = 0x5A
+TEMPERATURE_MAX_VALUE = 37.2
+TEMPERATURE_DELAY = 15  # sec
+
+class AdminWindow:
+    temperature = 0.0
+    distance = 5.0
+    workStatus = True
