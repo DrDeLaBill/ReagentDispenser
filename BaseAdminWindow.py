@@ -26,7 +26,7 @@ class Ui_MainWindow(object):
         self.coolerSlider.setOrientation(QtCore.Qt.Horizontal)
         self.coolerSlider.setObjectName("coolerSlider")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(20, 30, 411, 31))
+        self.label.setGeometry(QtCore.QRect(20, 30, 430, 31))
         font = QtGui.QFont()
         font.setPointSize(20)
         self.label.setFont(font)

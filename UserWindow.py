@@ -18,9 +18,6 @@ class UserWindow(Ui_MainWindow):
         self.loop.start()
         self.showMainScreen()
 
-    def __del__(self):
-        self.loop.terminate()
-
     def loopUi(self):
         while True:
             if self.isGPIO:

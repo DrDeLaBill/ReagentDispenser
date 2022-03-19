@@ -11,7 +11,7 @@ from BaseAdminWindow import Ui_MainWindow
 
 class AdminWindow(Ui_MainWindow):
     temperature = 0.0
-    distance = 0.0
+    distance = 999.9
     workStatus = False
 
     def setupUi(self, MainWindow):
@@ -31,7 +31,6 @@ class AdminWindow(Ui_MainWindow):
 
         self.setupGPIO()
         self.initButtonActions()
-        print('init loop')
         self.loop = threading.Thread(target=self.loopUi, args=())
         self.loop.start()
         print('loop start')
@@ -40,7 +39,6 @@ class AdminWindow(Ui_MainWindow):
 
     def __del__(self):
         GPIO.cleanup()
-        self.loop.terminate()
 
     def initButtonActions(self):
         self.coolerSlider.valueChanged.connect(self.coolerSliderAction)
@@ -169,7 +167,7 @@ class AdminWindow(Ui_MainWindow):
             self.label_6.setText("--°C")
 
     def isSmallDistance(self):
-        return self.getDistance() < constants.DISTANCE_MAX_VALUE
+        return self.getSensorDistance() < constants.DISTANCE_MAX_VALUE
 
     def getSensorTemperature(self):
         bus = SMBus(1)
