@@ -2,7 +2,7 @@ import threading
 import time
 
 import constants
-from constants import AdminWindow
+from AdminWindow import AdminWindow
 from BaseUserWindow import Ui_MainWindow
 
 
