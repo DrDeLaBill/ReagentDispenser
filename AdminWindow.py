@@ -39,6 +39,7 @@ class AdminWindow(Ui_MainWindow):
         self.showPassword()
 
     def __del__(self):
+        GPIO.cleanup()
         self.loop.terminate()
 
     def initButtonActions(self):
@@ -49,7 +50,6 @@ class AdminWindow(Ui_MainWindow):
         self.pushButton.clicked.connect(self.auth)
 
     def setupGPIO(self):
-        GPIO.cleanup()
         GPIO.setmode(GPIO.BCM)
         # Cooler settings
         GPIO.setup(constants.COOLER_GPIO_PWM_PIN, GPIO.OUT)
@@ -64,7 +64,7 @@ class AdminWindow(Ui_MainWindow):
         GPIO.setup(constants.LIQUID_EMPTY_PIN, GPIO.OUT)
         GPIO.setup(constants.LIQUID_MAIN_TANK_PIN, GPIO.OUT)
         GPIO.setup(constants.LIQUID_PUMP_PIN, GPIO.IN)
-        self.workStatus = True
+        AdminWindow.workStatus = True
 
     def loopUi(self):
         # GPIO actions
@@ -154,7 +154,7 @@ class AdminWindow(Ui_MainWindow):
         # and divide by 2, because there and back
         distance = (TimeElapsed * 34300) / 2
 
-        self.distance = distance
+        AdminWindow.distance = distance
         return distance
 
     def checkDistanceSensor(self):
@@ -176,7 +176,7 @@ class AdminWindow(Ui_MainWindow):
         try:
             temperature = sensor.get_object_1()
             bus.close()
-            self.temperature = temperature
+            AdminWindow.temperature = temperature
             return temperature
         except Exception:
             return "ERR"
