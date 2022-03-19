@@ -10,6 +10,8 @@ class UserWindow(Ui_MainWindow):
     def setupUi(self, MainWindow):
         # Main
         self.isGPIO = False
+        self.firstHand = False
+        self.waitForSecondHand = False
         self.delayTime = time.time()
 
         Ui_MainWindow.setupUi(self, MainWindow)
@@ -29,21 +31,30 @@ class UserWindow(Ui_MainWindow):
         self.isGPIO = AdminWindow.getWorkStatus()
 
     def checkVisitor(self):
-        if AdminWindow.getDistance() < constants.DISTANCE_MAX_VALUE:
+        distance = AdminWindow.getDistance()
+        if distance > constants.DISTANCE_MAX_VALUE and self.firstHand:
+            self.waitForSecondHand = True
+        if distance < constants.DISTANCE_MAX_VALUE:
             self.checkUserTemperature()
-        elif not self.isSecondMesurement():
+        elif not self.isDelayTime():
             self.showMainScreen()
 
     def checkUserTemperature(self):
         if self.isAlertTemperature() and not self.isDelayTime():
             self.showWarningScreen()
-        elif self.isAlertTemperature():
+            self.firstHand = True
+        elif self.isAlertTemperature() and self.isWaitForSecondHand():
             self.showAlertScreen()
+            self.firstHand = False
+            self.waitForSecondHand = False
         else:
             self.showSuccesScreen()
 
     def isDelayTime(self):
         return time.time() - self.delayTime < constants.TEMPERATURE_DELAY
+
+    def isWaitForSecondHand(self):
+        return self.firstHand and self.waitForSecondHand
 
     def isAlertTemperature(self):
         temperature = AdminWindow.getTemperature()
