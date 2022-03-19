@@ -164,14 +164,14 @@ class AdminWindow(Ui_MainWindow):
 
     def checkTemperature(self):
         if self.isSmallDistance():
-            self.label_6.setText(f"{self.getTemperature()}°C")
+            self.label_6.setText(f"{self.getSensorTemperature()}°C")
         else:
             self.label_6.setText("--°C")
 
     def isSmallDistance(self):
         return self.getDistance() < constants.DISTANCE_MAX_VALUE
 
-    def getTemperature(self):
+    def getSensorTemperature(self):
         bus = SMBus(1)
         sensor = MLX90614(bus, address=constants.TEMPERATURE_SENSOR_CHANNEL)
         try:
