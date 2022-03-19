@@ -50,6 +50,7 @@ class AdminWindow(Ui_MainWindow):
         self.pushButton.clicked.connect(self.auth)
 
     def setupGPIO(self):
+        GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
         # Cooler settings
         GPIO.setup(constants.COOLER_GPIO_PWM_PIN, GPIO.OUT)
@@ -191,3 +192,15 @@ class AdminWindow(Ui_MainWindow):
             self.label_7.show()
         else:
             self.label_7.hide()
+
+    @staticmethod
+    def getDistance():
+        return AdminWindow.distance
+
+    @staticmethod
+    def getTemperature():
+        return AdminWindow.temperature
+
+    @staticmethod
+    def getWorkStatus():
+        return AdminWindow.workStatus

@@ -29,10 +29,10 @@ class UserWindow(Ui_MainWindow):
                 self.checkGPIOStatus()
 
     def checkGPIOStatus(self):
-        self.isGPIO = AdminWindow.workStatus
+        self.isGPIO = AdminWindow.getWorkStatus()
 
     def checkVisitor(self):
-        if AdminWindow.distance < constants.DISTANCE_MAX_VALUE:
+        if AdminWindow.getDistance() < constants.DISTANCE_MAX_VALUE:
             self.checkUserTemperature()
         elif not self.isSecondMesurement():
             self.showMainScreen()
@@ -49,7 +49,7 @@ class UserWindow(Ui_MainWindow):
         return time.time() - self.delayTime < constants.TEMPERATURE_DELAY
 
     def isAlertTemperature(self):
-        return AdminWindow.temperature > constants.TEMPERATURE_MAX_VALUE
+        return AdminWindow.getTemperature() > constants.TEMPERATURE_MAX_VALUE
 
     def showMainScreen(self):
         self.hideAll()
