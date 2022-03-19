@@ -130,7 +130,7 @@ class AdminWindow(Ui_MainWindow):
         self.dispenserInWork = False
         GPIO.output(constants.DISPENSER_GPIO_PIN, GPIO.LOW)
 
-    def getDistance(self):
+    def getSensorDistance(self):
         # set Trigger to HIGH
         GPIO.output(constants.DISTANCE_GPIO_TRIGGER_PIN, GPIO.HIGH)
 
