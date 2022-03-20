@@ -60,16 +60,16 @@ class UserWindow(Ui_MainWindow):
             self.showMainScreen()
 
     def isWaitForSecondHand(self):
-        return self.isWarningTemp and AdminWindow.distance > constants.DISTANCE_MAX_VALUE and self.isDelayTime()
+        return self.isWarningTemp and AdminWindow.getDistance() > constants.DISTANCE_MAX_VALUE and self.isDelayTime()
 
     def isAlertTemperature(self):
-        return self.isWarningTemp and self.waitForSecondHand and AdminWindow.distance < constants.DISTANCE_MAX_VALUE and AdminWindow.temperature > constants.TEMPERATURE_MAX_VALUE
+        return self.isWarningTemp and self.waitForSecondHand and AdminWindow.getDistance() < constants.DISTANCE_MAX_VALUE and AdminWindow.getTemperature() > constants.TEMPERATURE_MAX_VALUE
 
     def isWarningTemperature(self):
-        return AdminWindow.distance < constants.DISTANCE_MAX_VALUE and AdminWindow.temperature > constants.TEMPERATURE_MAX_VALUE
+        return AdminWindow.getDistance() < constants.DISTANCE_MAX_VALUE and AdminWindow.getTemperature() > constants.TEMPERATURE_MAX_VALUE
 
     def isNormalTemperature(self):
-        return AdminWindow.distance < constants.DISTANCE_MAX_VALUE and AdminWindow.temperature < constants.TEMPERATURE_MAX_VALUE
+        return AdminWindow.getDistance() < constants.DISTANCE_MAX_VALUE and AdminWindow.getTemperature() < constants.TEMPERATURE_MAX_VALUE
 
     def isDelayTime(self):
         return time.time() - self.delayTime < constants.TEMPERATURE_DELAY
