@@ -23,18 +23,12 @@ class UserWindow(Ui_MainWindow):
     def loopUi(self):
         while True:
             if self.isGPIO:
-                self.checkVisitor()
+                self.checkUserTemperature()
             else:
                 self.checkGPIOStatus()
 
     def checkGPIOStatus(self):
         self.isGPIO = AdminWindow.getWorkStatus()
-
-    def checkVisitor(self):
-        if AdminWindow.getDistance() < constants.DISTANCE_MAX_VALUE:
-            self.checkUserTemperature()
-        elif not self.isDelayTime():
-            self.showMainScreen()
 
     def checkUserTemperature(self):
         if self.isWaitForSecondHand():
@@ -73,7 +67,7 @@ class UserWindow(Ui_MainWindow):
         return False
 
     def isWarningTemperature(self):
-        if AdminWindow.getDistance() < constants.DISTANCE_MAX_VALUE and AdminWindow.getTemperature() > constants.TEMPERATURE_MAX_VALUE:
+        if AdminWindow.getDistance() < constants.DISTANCE_MAX_VALUE and AdminWindow.getTemperature() > constants.TEMPERATURE_MAX_VALUE and not self.isDelayTime():
             return True
         return False
 
