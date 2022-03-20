@@ -167,7 +167,9 @@ class AdminWindow(Ui_MainWindow):
             self.label_6.setText("--°C")
 
     def isSmallDistance(self):
-        return self.getSensorDistance() < constants.DISTANCE_MAX_VALUE
+        if self.getSensorDistance() < constants.DISTANCE_MAX_VALUE:
+            return True
+        return False
 
     def getSensorTemperature(self):
         bus = SMBus(1)
@@ -193,6 +195,8 @@ class AdminWindow(Ui_MainWindow):
 
     @staticmethod
     def getDistance():
+        if AdminWindow.distance == 0.0:
+            return 999.9
         return AdminWindow.distance
 
     @staticmethod
