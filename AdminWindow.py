@@ -140,11 +140,11 @@ class AdminWindow(Ui_MainWindow):
         StopTime = time.time()
 
         # save StartTime
-        while GPIO.input(constants.DISTANCE_GPIO_ECHO_PIN) == 0:
+        while GPIO.input(constants.DISTANCE_GPIO_ECHO_PIN) == 0 and self.isNotTimeout():
             StartTime = time.time()
 
         # save time of arrival
-        while GPIO.input(constants.DISTANCE_GPIO_ECHO_PIN) == 1:
+        while GPIO.input(constants.DISTANCE_GPIO_ECHO_PIN) == 1 and self.isNotTimeout():
             StopTime = time.time()
 
         # time difference between start and arrival
@@ -155,6 +155,9 @@ class AdminWindow(Ui_MainWindow):
 
         AdminWindow.distance = distance
         return distance
+
+    def isNotTimeout(self):
+        return time.time() - self.workTime < 0.5
 
     def checkDistanceSensor(self):
         if self.isSmallDistance():
@@ -201,8 +204,6 @@ class AdminWindow(Ui_MainWindow):
 
     @staticmethod
     def getTemperature():
-        if AdminWindow.temperature < constants.TEMPERATURE_MIN_VALUE:
-            return False
         return AdminWindow.temperature
 
     @staticmethod
