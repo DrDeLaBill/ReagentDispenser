@@ -71,7 +71,6 @@ class UserWindow(Ui_MainWindow):
 
     def isNormalTemperature(self):
         if AdminWindow.getDistance() < constants.DISTANCE_MAX_VALUE and AdminWindow.getTemperature() < constants.TEMPERATURE_MAX_VALUE:
-            print(str(AdminWindow.getDistance()) + " " + str(AdminWindow.getTemperature()))
             return True
         return False
 
