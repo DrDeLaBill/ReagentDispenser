@@ -18,10 +18,9 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         # Получить размер разрешения монитора
-        self.desktop = QApplication.desktop()
-        self.screenRect = self.desktop.screenGeometry()
-        self.height = self.screenRect.height()
-        self.width = self.screenRect.width()
+        self.desktop = QtWidgets.QDesktopWidget().screenGeometry(1)
+        self.height = self.desktop.height()
+        self.width = self.desktop.width()
         MainWindow.resize(self.height, self.width)
         # Main window
         MainWindow.setEnabled(True)

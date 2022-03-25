@@ -209,12 +209,14 @@ class AdminWindow(Ui_MainWindow):
 
     @staticmethod
     def getDistance():
-        if AdminWindow.distance == 0.0:
+        if AdminWindow.distance <= 0.4:
             return 999.9
         return AdminWindow.distance
 
     @staticmethod
     def getTemperature():
+        if AdminWindow.distance <= 0.1:
+            return 0.0
         return AdminWindow.temperature
 
     @staticmethod
@@ -252,7 +254,7 @@ class AdminWindow(Ui_MainWindow):
         self.appendSignInLine('9')
 
     def appendSignInLine(self, sign):
-        self.lineEdit.text(self.lineEdit.text() + sign)
+        self.lineEdit.setText(str(self.lineEdit.text() + sign))
 
     def bDelAction(self):
-        self.lineEdit.text(self.lineEdit.text()[:-1])
+        self.lineEdit.setText(self.lineEdit.text()[:-1])
