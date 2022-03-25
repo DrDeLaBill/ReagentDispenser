@@ -26,6 +26,8 @@ class AdminWindow(Ui_MainWindow):
         # Main
         self.workTime = time.time()
         self.isAuth = False
+        # Temperature
+        self.temperatureSensorInWork = False
 
         Ui_MainWindow.setupUi(self, MainWindow)
 
@@ -105,10 +107,12 @@ class AdminWindow(Ui_MainWindow):
             self.coolerPWM.ChangeDutyCycle(self.coolerSlider.value())
 
     def switchTemperatureAction(self):
-        print("switchTemperature: " + str(self.switchTemperature.dPtr.position))
+        if self.switchTemperature.dPtr.position:
+            self.temperatureSensorInWork = False
+        else:
+            self.temperatureSensorInWork = True
 
     def switchReagentAction(self):
-        print("switchReagent: " + str(self.switchReagent.dPtr.position))
         if self.switchReagent.dPtr.position:
             self.dispenserEnable = False
         else:
@@ -175,9 +179,10 @@ class AdminWindow(Ui_MainWindow):
             self.dispenserTurnOn()
 
     def checkTemperature(self):
-        if self.isSmallDistance():
+        if self.isSmallDistance() and self.temperatureSensorInWork:
             self.label_6.setText(f"{self.getSensorTemperature()}°C")
         else:
+            self.temperature = 0.0
             self.label_6.setText("--°C")
 
     def isSmallDistance(self):

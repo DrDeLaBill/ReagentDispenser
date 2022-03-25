@@ -35,9 +35,9 @@ class Ui_MainWindow(object):
         self.successBox.setObjectName("successBox")
         self.label_2 = QtWidgets.QLabel(self.successBox)
         self.label_2.setGeometry(QtCore.QRect(
-            self.width // 2 - 110,
+            self.width // 2 - 120,
             self.height // 2 - 25,
-            220,
+            250,
             50
         ))
         font = QtGui.QFont()
@@ -46,9 +46,9 @@ class Ui_MainWindow(object):
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.successBox)
         self.label_3.setGeometry(QtCore.QRect(
-            self.width // 2 - 170,
+            self.width // 2 - 180,
             self.height // 2 + 35,
-            320,
+            350,
             50
         ))
         font = QtGui.QFont()
@@ -62,9 +62,9 @@ class Ui_MainWindow(object):
         self.mainBox.setObjectName("mainBox")
         self.label_4 = QtWidgets.QLabel(self.mainBox)
         self.label_4.setGeometry(QtCore.QRect(
-            self.width // 2 - 200,
+            self.width // 2 - 220,
             self.height // 2 - 25,
-            400,
+            420,
             50
         ))
         font = QtGui.QFont()
@@ -78,9 +78,9 @@ class Ui_MainWindow(object):
         self.alertBox.setObjectName("alertBox")
         self.label_6 = QtWidgets.QLabel(self.alertBox)
         self.label_6.setGeometry(QtCore.QRect(
-            self.width // 2 - 170,
+            self.width // 2 - 180,
             self.height // 2 - 25,
-            340,
+            370,
             50
         ))
         font = QtGui.QFont()
@@ -89,9 +89,9 @@ class Ui_MainWindow(object):
         self.label_6.setObjectName("label_6")
         self.label_7 = QtWidgets.QLabel(self.alertBox)
         self.label_7.setGeometry(QtCore.QRect(
-            self.width // 2 - 160,
+            self.width // 2 - 170,
             self.height // 2 + 35,
-            320,
+            350,
             50
         ))
         font = QtGui.QFont()
@@ -105,9 +105,9 @@ class Ui_MainWindow(object):
         self.warningBox.setObjectName("warningBox")
         self.label_5 = QtWidgets.QLabel(self.warningBox)
         self.label_5.setGeometry(QtCore.QRect(
-            self.width // 2 - 180,
+            self.width // 2 - 190,
             self.height // 2 - 25,
-            360,
+            400,
             50
         ))
         font = QtGui.QFont()

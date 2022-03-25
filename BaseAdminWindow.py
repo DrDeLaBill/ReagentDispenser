@@ -9,9 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication
 
-import constants
 from switch import Switch
 
 
@@ -31,7 +29,7 @@ class Ui_MainWindow(object):
         self.coolerSlider.setOrientation(QtCore.Qt.Horizontal)
         self.coolerSlider.setObjectName("coolerSlider")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(20, 30, 430, 31))
+        self.label.setGeometry(QtCore.QRect(20, 30, 500, 31))
         font = QtGui.QFont()
         font.setPointSize(20)
         self.label.setFont(font)
@@ -69,8 +67,8 @@ class Ui_MainWindow(object):
         self.label_7.setObjectName("label_7")
         self.switchReagent = Switch(MainWindow)
         self.switchTemperature = Switch(MainWindow)
-        self.switchReagent.setGeometry(QtCore.QRect(360, 150, 75, 31))
-        self.switchTemperature.setGeometry(QtCore.QRect(360, 210, 75, 31))
+        self.switchReagent.setGeometry(QtCore.QRect(400, 150, 75, 31))
+        self.switchTemperature.setGeometry(QtCore.QRect(400, 210, 75, 31))
         self.label_7.hide()
 
         # Password window
@@ -188,7 +186,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        self.showPassword()
+        self.showMainWindow()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
