@@ -45,7 +45,18 @@ class AdminWindow(Ui_MainWindow):
         self.coolerSlider.setTickPosition(0)
         self.switchTemperature.clicked.connect(self.switchTemperatureAction)
         self.switchReagent.clicked.connect(self.switchReagentAction)
-        self.pushButton.clicked.connect(self.auth)
+        self.b0.clicked.connect(self.b0Action)
+        self.b1.clicked.connect(self.b1Action)
+        self.b2.clicked.connect(self.b2Action)
+        self.b3.clicked.connect(self.b3Action)
+        self.b4.clicked.connect(self.b4Action)
+        self.b5.clicked.connect(self.b5Action)
+        self.b6.clicked.connect(self.b6Action)
+        self.b7.clicked.connect(self.b7Action)
+        self.b8.clicked.connect(self.b8Action)
+        self.b9.clicked.connect(self.b9Action)
+        self.bDel.clicked.connect(self.bDelAction)
+        self.bOK.clicked.connect(self.auth)
 
     def setupGPIO(self):
         GPIO.setwarnings(False)
@@ -209,3 +220,39 @@ class AdminWindow(Ui_MainWindow):
     @staticmethod
     def getWorkStatus():
         return AdminWindow.workStatus
+
+    def b0Action(self):
+        self.appendSignInLine('0')
+
+    def b1Action(self):
+        self.appendSignInLine('1')
+
+    def b2Action(self):
+        self.appendSignInLine('2')
+
+    def b3Action(self):
+        self.appendSignInLine('3')
+
+    def b4Action(self):
+        self.appendSignInLine('4')
+
+    def b5Action(self):
+        self.appendSignInLine('5')
+
+    def b6Action(self):
+        self.appendSignInLine('6')
+
+    def b7Action(self):
+        self.appendSignInLine('7')
+
+    def b8Action(self):
+        self.appendSignInLine('8')
+
+    def b9Action(self):
+        self.appendSignInLine('9')
+
+    def appendSignInLine(self, sign):
+        self.lineEdit.text(self.lineEdit.text() + sign)
+
+    def bDelAction(self):
+        self.lineEdit.text(self.lineEdit.text()[:-1])

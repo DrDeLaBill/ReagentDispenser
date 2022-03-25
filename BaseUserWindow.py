@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication
 
 import constants
 
@@ -16,63 +17,100 @@ import constants
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
+        # Получить размер разрешения монитора
+        self.desktop = QApplication.desktop()
+        self.screenRect = self.desktop.screenGeometry()
+        self.height = self.screenRect.height()
+        self.width = self.screenRect.width()
+        MainWindow.resize(self.height, self.width)
+        # Main window
         MainWindow.setEnabled(True)
-        MainWindow.resize(constants.SCREEN_WIDTH, constants.SCREEN_HIGH)
+        MainWindow.resize(self.width, self.height)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setEnabled(True)
         self.centralwidget.setObjectName("centralwidget")
         self.successBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.successBox.setGeometry(QtCore.QRect(0, 0, 480, 854))
+        self.successBox.setGeometry(QtCore.QRect(0, 0, self.width, self.height))
         self.successBox.setStyleSheet("background-color: rgb(0, 255, 127);")
         self.successBox.setTitle("")
         self.successBox.setObjectName("successBox")
         self.label_2 = QtWidgets.QLabel(self.successBox)
-        self.label_2.setGeometry(QtCore.QRect(130, 360, 221, 51))
+        self.label_2.setGeometry(QtCore.QRect(
+            self.width // 2 - 110,
+            self.height // 2 - 25,
+            220,
+            50
+        ))
         font = QtGui.QFont()
         font.setPointSize(30)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.successBox)
-        self.label_3.setGeometry(QtCore.QRect(80, 420, 321, 51))
+        self.label_3.setGeometry(QtCore.QRect(
+            self.width // 2 - 170,
+            self.height // 2 + 35,
+            320,
+            50
+        ))
         font = QtGui.QFont()
         font.setPointSize(30)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
         self.mainBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.mainBox.setGeometry(QtCore.QRect(0, 0, 480, 854))
+        self.mainBox.setGeometry(QtCore.QRect(0, 0, self.width, self.height))
         self.mainBox.setStyleSheet("background-color: rgb(255, 255, 0);")
         self.mainBox.setTitle("")
         self.mainBox.setObjectName("mainBox")
         self.label_4 = QtWidgets.QLabel(self.mainBox)
-        self.label_4.setGeometry(QtCore.QRect(40, 360, 400, 51))
+        self.label_4.setGeometry(QtCore.QRect(
+            self.width // 2 - 200,
+            self.height // 2 - 25,
+            400,
+            50
+        ))
         font = QtGui.QFont()
         font.setPointSize(25)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
         self.alertBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.alertBox.setGeometry(QtCore.QRect(0, 0, 480, 854))
+        self.alertBox.setGeometry(QtCore.QRect(0, 0, self.width, self.height))
         self.alertBox.setStyleSheet("background-color: rgb(255, 72, 0);")
         self.alertBox.setTitle("")
         self.alertBox.setObjectName("alertBox")
         self.label_6 = QtWidgets.QLabel(self.alertBox)
-        self.label_6.setGeometry(QtCore.QRect(70, 360, 340, 51))
+        self.label_6.setGeometry(QtCore.QRect(
+            self.width // 2 - 170,
+            self.height // 2 - 25,
+            340,
+            50
+        ))
         font = QtGui.QFont()
         font.setPointSize(25)
         self.label_6.setFont(font)
         self.label_6.setObjectName("label_6")
         self.label_7 = QtWidgets.QLabel(self.alertBox)
-        self.label_7.setGeometry(QtCore.QRect(80, 410, 320, 50))
+        self.label_7.setGeometry(QtCore.QRect(
+            self.width // 2 - 160,
+            self.height // 2 + 35,
+            320,
+            50
+        ))
         font = QtGui.QFont()
         font.setPointSize(25)
         self.label_7.setFont(font)
         self.label_7.setObjectName("label_7")
         self.warningBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.warningBox.setGeometry(QtCore.QRect(0, 0, 480, 854))
+        self.warningBox.setGeometry(QtCore.QRect(0, 0, self.width, self.height))
         self.warningBox.setStyleSheet("background-color: rgb(255, 255, 0);")
         self.warningBox.setTitle("")
         self.warningBox.setObjectName("warningBox")
         self.label_5 = QtWidgets.QLabel(self.warningBox)
-        self.label_5.setGeometry(QtCore.QRect(60, 360, 360, 51))
+        self.label_5.setGeometry(QtCore.QRect(
+            self.width // 2 - 180,
+            self.height // 2 - 25,
+            360,
+            50
+        ))
         font = QtGui.QFont()
         font.setPointSize(25)
         self.label_5.setFont(font)
