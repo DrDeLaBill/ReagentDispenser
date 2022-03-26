@@ -173,7 +173,7 @@ class AdminWindow(Ui_MainWindow):
 
     def checkTemperature(self):
         if self.isSmallDistance() and self.temperatureSensorInWork:
-            self.label_6.setText(f"{self.getSensorTemperature()}°C")
+            self.label_6.setText("{:.1f}°C".format(self.getSensorTemperature()))
         else:
             self.temperature = 0.0
             self.label_6.setText("--°C")
