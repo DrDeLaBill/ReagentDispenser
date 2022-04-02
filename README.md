@@ -106,7 +106,7 @@ user@my-pc:/path/to/project/PyMLX90614-0.0.3$ sudo python setup.py install
     - [Инструкция для проверки](./PyMLX90614-0.0.3/README.md)
 
 - Схема подключения HC-SR04:
-![empty image](./readme_inmg/hc-sr04_1.png)
+![empty image](./readme_img/hc-sr04_1.png)
 
 
 - Источники:
