@@ -82,9 +82,9 @@ sh /path/to/project/calibrate.sh
 ```bash
 user@my-pc:~$ sudo raspi-config
 ```
-![empty image](./readme_img/i2c_1.jpg)
+<img alt="empty image" src="./readme_img/i2c_1.jpg"  style="width: 50%;"/>
 
-![empty image](./readme_img/i2c_2.jpg)
+<img alt="empty image" src="./readme_img/i2c_2.jpg"  style="width: 50%;"/>
 
 - Установить пакет MLX90614:
 ```bash
@@ -106,7 +106,7 @@ user@my-pc:/path/to/project/PyMLX90614-0.0.3$ sudo python setup.py install
     - [Инструкция для проверки](./PyMLX90614-0.0.3/README.md)
 
 - Схема подключения HC-SR04:
-![empty image](./readme_img/hc-sr04_1.png)
+<img src="./readme_img/hc-sr04_1.png" style="width: 50%;"/>
 
 
 - Источники:
