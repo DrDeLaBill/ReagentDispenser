@@ -35,6 +35,7 @@ class AdminWindow(Ui_MainWindow):
         self.initButtonActions()
         self.loop = threading.Thread(target=self.loopUi, args=())
         self.loop.start()
+        print('loop start')
 
         self.showPassword()
 
@@ -71,10 +72,10 @@ class AdminWindow(Ui_MainWindow):
         GPIO.setup(constants.DISTANCE_GPIO_TRIGGER_PIN, GPIO.OUT)
         GPIO.setup(constants.DISTANCE_GPIO_ECHO_PIN, GPIO.IN)
         # Pump
-        GPIO.setup(constants.LIQUID_FULL_PIN, GPIO.OUT)
-        GPIO.setup(constants.LIQUID_EMPTY_PIN, GPIO.OUT)
-        GPIO.setup(constants.LIQUID_MAIN_TANK_PIN, GPIO.OUT)
-        GPIO.setup(constants.LIQUID_PUMP_PIN, GPIO.IN)
+        GPIO.setup(constants.LIQUID_FULL_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(constants.LIQUID_EMPTY_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(constants.LIQUID_MAIN_TANK_PIN.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(constants.LIQUID_PUMP_PIN, GPIO.OUT)
         AdminWindow.workStatus = True
 
     def loopUi(self):
@@ -92,13 +93,17 @@ class AdminWindow(Ui_MainWindow):
             self.showMainWindow()
 
     def coolerSliderAction(self):
+        print("Slider: " + str(self.coolerSlider.value()))
         if self.coolerSlider.value() == 0:
+            print("Cooler stop")
             self.coolerPWM.stop()
             self.coolerInWork = False
         elif not self.coolerInWork:
+            print("Cooler start")
             self.coolerPWM.start(self.coolerSlider.value())
             self.coolerInWork = True
         else:
+            print("Cooler change")
             self.coolerPWM.ChangeDutyCycle(self.coolerSlider.value())
 
     def switchTemperatureAction(self):
@@ -116,6 +121,7 @@ class AdminWindow(Ui_MainWindow):
     def dispenserTurnOn(self):
         if self.coolerSlider.value() > 0 and self.dispenserEnable:
             if self.workTime - self.dispenserCycleTime >= constants.DISPENSER_MAX_DELAY_TIME:
+                print("Dispenser off")
                 self.dispenserOff()
             elif not self.dispenserInWork:
                 self.dispenserCheckDelay()
@@ -125,6 +131,7 @@ class AdminWindow(Ui_MainWindow):
     def dispenserCheckDelay(self):
         delayTime = self.coolerSlider.value() * constants.DISPENSER_MAX_DELAY_TIME / 100
         if self.workTime >= delayTime + self.dispenserCycleTime:
+            print("Dispenser on")
             self.dispenserOn()
 
     def dispenserOn(self):
