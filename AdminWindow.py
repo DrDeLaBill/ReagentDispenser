@@ -1,6 +1,7 @@
 import threading
 import time
 
+import subprocess
 import RPi.GPIO as GPIO
 from smbus2 import SMBus
 from mlx90614 import MLX90614
@@ -59,6 +60,10 @@ class AdminWindow(Ui_MainWindow):
         self.b9.clicked.connect(self.b9Action)
         self.bDel.clicked.connect(self.bDelAction)
         self.bOK.clicked.connect(self.auth)
+        self.bQuit.clicked.connect(self.quit)
+        self.bOff.clicked.connect(self.showConfirmWindow)
+        self.bConfirmOk.clicked.connect(self.shutdown)
+        self.bCancel.clicked.connect(self.hideConfirmWindow)
 
     def setupGPIO(self):
         GPIO.setwarnings(False)
@@ -227,6 +232,13 @@ class AdminWindow(Ui_MainWindow):
     @staticmethod
     def getWorkStatus():
         return AdminWindow.workStatus
+
+    def quit(self):
+        self.showPassword()
+
+    def shutdown(self):
+        print('shutdown')
+        subprocess.run('sudo shutdown -h now')
 
     def b0Action(self):
         self.appendSignInLine('0')
