@@ -1,6 +1,8 @@
 import threading
 import time
 
+from PyQt5 import QtWidgets
+
 import constants
 from AdminWindow import AdminWindow
 from BaseUserWindow import Ui_MainWindow
@@ -53,58 +55,27 @@ class UserWindow(Ui_MainWindow):
             self.isWarningTemp = False
             self.showMainScreen()
 
-    def isWaitForSecondHand(self):
-        if self.isWarningTemp and not self.waitForSecondHand and AdminWindow.getDistance() > constants.DISTANCE_MAX_VALUE and self.isDelayTime():
-            return True
-        return False
+    def isWaitForSecondHand(self) -> bool:
+        return self.isWarningTemp and not self.waitForSecondHand and AdminWindow.getDistance() > constants.DISTANCE_MAX_VALUE and self.isDelayTime()
 
-    def isAlertTemperature(self):
-        temperature = AdminWindow.getTemperature()
-        if self.isWarningTemp and self.waitForSecondHand and AdminWindow.getDistance() < constants.DISTANCE_MAX_VALUE and temperature > constants.TEMPERATURE_MAX_VALUE:
-            return True
-        return False
+    def isAlertTemperature(self) -> bool:
+        return self.isWarningTemp and self.waitForSecondHand and AdminWindow.getDistance() < constants.DISTANCE_MAX_VALUE and AdminWindow.getTemperature() > constants.TEMPERATURE_MAX_VALUE
 
-    def isWarningTemperature(self):
-        if AdminWindow.getDistance() < constants.DISTANCE_MAX_VALUE and AdminWindow.getTemperature() > constants.TEMPERATURE_MAX_VALUE and not self.isDelayTime():
-            return True
-        return False
+    def isWarningTemperature(self) -> bool:
+        return AdminWindow.getDistance() < constants.DISTANCE_MAX_VALUE and AdminWindow.getTemperature() > constants.TEMPERATURE_MAX_VALUE and not self.isDelayTime()
 
-    def isNormalTemperature(self):
-        if AdminWindow.getDistance() < constants.DISTANCE_MAX_VALUE and AdminWindow.getTemperature() < constants.TEMPERATURE_MAX_VALUE:
-            return True
-        return False
+    def isNormalTemperature(self) -> bool:
+        return AdminWindow.getDistance() < constants.DISTANCE_MAX_VALUE and AdminWindow.getTemperature() < constants.TEMPERATURE_MAX_VALUE
 
-    def isDelayTime(self):
-        if (time.time() - self.delayTime) < constants.TEMPERATURE_DELAY:
-            return True
-        return False
+    def isDelayTime(self) -> bool:
+        return (time.time() - self.delayTime) < constants.TEMPERATURE_DELAY
 
-    def showMainScreen(self):
-        self.warningBox.hide()
-        self.alertBox.hide()
-        self.successBox.hide()
-        self.mainBox.show()
 
-    def showWarningScreen(self):
-        self.mainBox.hide()
-        self.alertBox.hide()
-        self.successBox.hide()
-        self.warningBox.show()
-
-    def showAlertScreen(self):
-        self.mainBox.hide()
-        self.warningBox.hide()
-        self.successBox.hide()
-        self.alertBox.show()
-
-    def showSuccesScreen(self):
-        self.mainBox.hide()
-        self.warningBox.hide()
-        self.alertBox.hide()
-        self.successBox.show()
-
-    def hideAll(self):
-        self.mainBox.hide()
-        self.warningBox.hide()
-        self.alertBox.hide()
-        self.successBox.hide()
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.showFullScreen()
+    sys.exit(app.exec_())
