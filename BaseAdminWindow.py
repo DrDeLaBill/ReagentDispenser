@@ -9,7 +9,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets, Qt
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QLabel
 
+import constants
 from switch import Switch
 
 
@@ -23,6 +26,7 @@ class Ui_MainWindow(object):
         MainWindow.resize(self.height, self.width)
         # Main window
         self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setStyleSheet(constants.BACKGROUND_COLOR)
         self.centralwidget.setObjectName("centralwidget")
         self.groupOperator = QtWidgets.QGroupBox(self.centralwidget)
         self.groupOperator.setGeometry(QtCore.QRect(
@@ -33,36 +37,81 @@ class Ui_MainWindow(object):
         ))
         self.groupOperator.setTitle("")
         self.groupOperator.setObjectName("groupOperator")
+
+        self.bSliderMinus = QtWidgets.QPushButton(self.groupOperator)
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        self.bSliderMinus.setFont(font)
+        self.bSliderMinus.setObjectName("bSliderMinus")
+        self.bSliderMinus.setGeometry(QtCore.QRect(
+            20,
+            70,
+            50,
+            50
+        ))
+        self.bSliderMinus.setStyleSheet(constants.BUTTON_COLOR)
+
         self.coolerSlider = QtWidgets.QSlider(self.groupOperator)
-        self.coolerSlider.setGeometry(QtCore.QRect(20, 70, 411, 22))
+        self.coolerSlider.setGeometry(QtCore.QRect(80, 80, 320, 22))
         self.coolerSlider.setOrientation(QtCore.Qt.Horizontal)
         self.coolerSlider.setObjectName("coolerSlider")
+
+        self.bSliderPlus = QtWidgets.QPushButton(self.groupOperator)
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        self.bSliderPlus.setFont(font)
+        self.bSliderPlus.setObjectName("bSliderPlus")
+        self.bSliderPlus.setGeometry(QtCore.QRect(
+            420,
+            70,
+            50,
+            50
+        ))
+        self.bSliderPlus.setStyleSheet(constants.BUTTON_COLOR)
+
         self.label = QtWidgets.QLabel(self.groupOperator)
         self.label.setGeometry(QtCore.QRect(20, 30, 500, 31))
         font = QtGui.QFont()
         font.setPointSize(20)
         self.label.setFont(font)
         self.label.setObjectName("label")
+
         self.label_2 = QtWidgets.QLabel(self.groupOperator)
-        self.label_2.setGeometry(QtCore.QRect(20, 100, 47, 13))
+        self.label_2.setGeometry(QtCore.QRect(80, 100, 47, 13))
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.groupOperator)
-        self.label_3.setGeometry(QtCore.QRect(410, 100, 47, 13))
+        self.label_3.setGeometry(QtCore.QRect(380, 100, 30, 13))
         self.label_3.setObjectName("label_3")
+
         self.label_4 = QtWidgets.QLabel(self.groupOperator)
         self.label_4.setGeometry(QtCore.QRect(20, 150, 411, 21))
         font = QtGui.QFont()
         font.setPointSize(20)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
+
         self.label_5 = QtWidgets.QLabel(self.groupOperator)
         self.label_5.setGeometry(QtCore.QRect(20, 210, 411, 31))
         font = QtGui.QFont()
         font.setPointSize(20)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
+        self.labelImage = QLabel(MainWindow)
+        self.labelImage.setGeometry(QtCore.QRect(
+            self.width - constants.IMAGE_WIDTH - 30,
+            30,
+            constants.IMAGE_WIDTH,
+            constants.IMAGE_HEIGHT
+        ))
+        self.pixmap = QPixmap('./images/label.png').scaled(constants.IMAGE_WIDTH, constants.IMAGE_HEIGHT)
+        self.labelImage.setPixmap(self.pixmap)
         self.label_6 = QtWidgets.QLabel(self.groupOperator)
-        self.label_6.setGeometry(QtCore.QRect(self.width - 150, 20, 121, 51))
+        self.label_6.setGeometry(QtCore.QRect(
+            self.width - constants.IMAGE_WIDTH - 30,
+            constants.IMAGE_HEIGHT + 40,
+            121,
+            51
+        ))
         font = QtGui.QFont()
         font.setPointSize(30)
         self.label_6.setFont(font)
@@ -84,12 +133,14 @@ class Ui_MainWindow(object):
         self.bOff.setFont(font)
         self.bOff.setObjectName("bOff")
         self.bOff.setGeometry(QtCore.QRect(self.width - 300, self.height - 100, 250, 50))
+        self.bOff.setStyleSheet(constants.BUTTON_COLOR)
         self.bQuit = QtWidgets.QPushButton(self.groupOperator)
         font = QtGui.QFont()
         font.setPointSize(20)
         self.bQuit.setFont(font)
         self.bQuit.setObjectName("bQuit")
         self.bQuit.setGeometry(QtCore.QRect(self.width - 300, self.height - 175, 250, 50))
+        self.bQuit.setStyleSheet(constants.BUTTON_COLOR)
         self.label_7.hide()
 
         # Confirm quit
@@ -102,6 +153,8 @@ class Ui_MainWindow(object):
         ))
         self.groupConfirm.setTitle("")
         self.groupConfirm.setObjectName("groupConfirm")
+        self.groupConfirm.setStyleSheet(constants.BUTTON_COLOR)
+
         self.labelShutdown = QtWidgets.QLabel(self.groupConfirm)
         self.labelShutdown.setAlignment(Qt.Qt.AlignCenter)
         self.labelShutdown.setGeometry(QtCore.QRect(
@@ -115,19 +168,23 @@ class Ui_MainWindow(object):
         self.labelShutdown.setFont(font)
         self.labelShutdown.setStyleSheet("color: rgb(0, 0, 0);")
         self.labelShutdown.setObjectName("labelQuit")
+
         self.bConfirmOk = QtWidgets.QPushButton(self.groupConfirm)
         font = QtGui.QFont()
         font.setPointSize(20)
         self.bConfirmOk.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.bConfirmOk.setFont(font)
         self.bConfirmOk.setObjectName("bConfirmOk")
+        self.bConfirmOk.setStyleSheet(constants.BACKGROUND_COLOR)
         self.bConfirmOk.setGeometry(QtCore.QRect(275, 75, 100, 50))
+
         self.bCancel = QtWidgets.QPushButton(self.groupConfirm)
         font = QtGui.QFont()
         font.setPointSize(20)
         self.bCancel.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.bCancel.setFont(font)
         self.bCancel.setObjectName("bCancel")
+        self.bCancel.setStyleSheet(constants.BACKGROUND_COLOR)
         self.bCancel.setGeometry(QtCore.QRect(25, 75, 100, 50))
 
         # Password window
@@ -140,113 +197,137 @@ class Ui_MainWindow(object):
         ))
         self.groupBox.setTitle("")
         self.groupBox.setObjectName("groupBox")
+        self.groupBox.setStyleSheet(constants.BUTTON_COLOR)
+
         self.verticalLayoutWidget = QtWidgets.QWidget(self.groupBox)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 581, 339))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
+
         self.label_8 = QtWidgets.QLabel(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(30)
         self.label_8.setFont(font)
         self.label_8.setObjectName("label")
         self.verticalLayout.addWidget(self.label_8)
+
         self.lineEdit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(25)
         self.lineEdit.setFont(font)
         self.lineEdit.setObjectName("lineEdit")
+        self.lineEdit.setStyleSheet('background-color: rgb(255, 255, 255);')
         self.verticalLayout.addWidget(self.lineEdit)
+
         self.gridLayout_2 = QtWidgets.QGridLayout()
         self.gridLayout_2.setObjectName("gridLayout_2")
+
         self.b5 = QtWidgets.QPushButton(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(25)
         self.b5.setFont(font)
         self.b5.setObjectName("b5")
+        self.b5.setStyleSheet(constants.BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b5, 2, 1, 1, 1)
+
         self.b4 = QtWidgets.QPushButton(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(25)
         self.b4.setFont(font)
         self.b4.setObjectName("b4")
+        self.b4.setStyleSheet(constants.BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b4, 2, 0, 1, 1)
+
         self.b2 = QtWidgets.QPushButton(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(25)
         self.b2.setFont(font)
         self.b2.setObjectName("b2")
+        self.b2.setStyleSheet(constants.BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b2, 1, 1, 1, 1)
+
         self.b0 = QtWidgets.QPushButton(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(25)
         self.b0.setFont(font)
         self.b0.setObjectName("b0")
+        self.b0.setStyleSheet(constants.BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b0, 5, 1, 1, 1)
+
         self.bDel = QtWidgets.QPushButton(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(25)
         self.bDel.setFont(font)
         self.bDel.setObjectName("bDel")
+        self.bDel.setStyleSheet(constants.BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.bDel, 5, 0, 1, 1)
+
         self.bOK = QtWidgets.QPushButton(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(25)
         self.bOK.setFont(font)
         self.bOK.setObjectName("bOK")
+        self.bOK.setStyleSheet(constants.BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.bOK, 5, 2, 1, 1)
+
         self.b8 = QtWidgets.QPushButton(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(25)
         self.b8.setFont(font)
         self.b8.setObjectName("b8")
+        self.b8.setStyleSheet(constants.BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b8, 4, 1, 1, 1)
+
         self.b3 = QtWidgets.QPushButton(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(25)
         self.b3.setFont(font)
         self.b3.setObjectName("b3")
+        self.b3.setStyleSheet(constants.BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b3, 1, 2, 1, 1)
+
         self.b9 = QtWidgets.QPushButton(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(25)
         self.b9.setFont(font)
         self.b9.setObjectName("b9")
+        self.b9.setStyleSheet(constants.BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b9, 4, 2, 1, 1)
+
         self.b1 = QtWidgets.QPushButton(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(25)
         self.b1.setFont(font)
         self.b1.setObjectName("b1")
+        self.b1.setStyleSheet(constants.BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b1, 1, 0, 1, 1)
+
         self.b6 = QtWidgets.QPushButton(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(25)
         self.b6.setFont(font)
         self.b6.setObjectName("b6")
+        self.b6.setStyleSheet(constants.BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b6, 2, 2, 1, 1)
+
         self.b7 = QtWidgets.QPushButton(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(25)
         self.b7.setFont(font)
         self.b7.setObjectName("b7")
+        self.b7.setStyleSheet(constants.BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b7, 4, 0, 1, 1)
+
         self.verticalLayout.addLayout(self.gridLayout_2)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1280, 21))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         self.hideConfirmWindow()
-        self.showMainWindow()
+        self.showPassword()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -276,14 +357,22 @@ class Ui_MainWindow(object):
         self.bOff.setText(_translate("MainWindow", "Выключить"))
         self.bConfirmOk.setText(_translate("MainWindow", "OK"))
         self.bCancel.setText(_translate("MainWindow", "Отмена"))
+        self.bSliderMinus.setText(_translate("MainWindow", "-"))
+        self.bSliderPlus.setText(_translate("MainWindow", "+"))
 
     def showPassword(self):
+        self.switchTemperature.hide()
+        self.switchReagent.hide()
         self.hideConfirmWindow()
+        self.labelImage.hide()
         self.groupOperator.hide()
         self.groupBox.show()
 
     def showMainWindow(self):
         self.groupBox.hide()
+        self.labelImage.show()
+        self.switchTemperature.show()
+        self.switchReagent.show()
         self.groupOperator.show()
 
     def showConfirmWindow(self):

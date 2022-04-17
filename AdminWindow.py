@@ -24,11 +24,12 @@ class AdminWindow(Ui_MainWindow):
         self.dispenserEnable = False
         self.dispenserCycleTime = time.time()
         self.dispenserDelayTime = 0
-        # Main
-        self.workTime = time.time()
-        self.isAuth = False
         # Temperature
         self.temperatureSensorInWork = False
+        # Main
+        self.workTime = time.time()
+        self.quitDelayTime = time.time()
+        self.isAuth = False
 
         Ui_MainWindow.setupUi(self, MainWindow)
 
@@ -64,6 +65,8 @@ class AdminWindow(Ui_MainWindow):
         self.bOff.clicked.connect(self.showConfirmWindow)
         self.bConfirmOk.clicked.connect(self.shutdown)
         self.bCancel.clicked.connect(self.hideConfirmWindow)
+        self.bSliderMinus.clicked.connect(self.sliderMinus)
+        self.bSliderPlus.clicked.connect(self.sliderPlus)
 
     def setupGPIO(self):
         GPIO.setwarnings(False)
@@ -91,6 +94,9 @@ class AdminWindow(Ui_MainWindow):
                 self.checkTemperature()
                 self.checkLiquidLevel()
                 self.checkDistanceSensor()
+                self.checkQuitDelay()
+            else:
+                self.quitDelayTime = time.time()
 
     def auth(self):
         if self.lineEdit.text() == constants.PASSWORD:
@@ -217,6 +223,11 @@ class AdminWindow(Ui_MainWindow):
         else:
             self.label_7.hide()
 
+    def checkQuitDelay(self):
+        if self.quitDelayTime + constants.QUIT_DELAY < time.time():
+            self.isAuth = False
+            self.showPassword()
+
     @staticmethod
     def getDistance():
         if AdminWindow.distance <= 0.4:
@@ -275,3 +286,17 @@ class AdminWindow(Ui_MainWindow):
 
     def bDelAction(self):
         self.lineEdit.setText(self.lineEdit.text()[:-1])
+
+    def sliderMinus(self):
+        sliderValue = self.coolerSlider.value() - 10
+        if sliderValue < 0:
+            sliderValue = 0
+        self.coolerSlider.setValue(sliderValue)
+        self.coolerSliderAction()
+
+    def sliderPlus(self):
+        sliderValue = self.coolerSlider.value() + 10
+        if sliderValue > 100:
+            sliderValue = 100
+        self.coolerSlider.setValue(sliderValue)
+        self.coolerSliderAction()

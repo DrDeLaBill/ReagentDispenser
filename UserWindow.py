@@ -15,6 +15,7 @@ class UserWindow(Ui_MainWindow):
         self.isWarningTemp = False
         self.waitForSecondHand = False
         self.delayTime = time.time()
+        self.temperature = 0
 
         Ui_MainWindow.setupUi(self, MainWindow)
 
@@ -54,6 +55,13 @@ class UserWindow(Ui_MainWindow):
             self.waitForSecondHand = False
             self.isWarningTemp = False
             self.showMainScreen()
+
+    def updateTemperature(self):
+        self.temperature = AdminWindow.getTemperature()
+        self.label_alert.setText(str(self.temperature) + '°C')
+        self.label_warning.setText(str(self.temperature) + '°C')
+        self.label_success.setText(str(self.temperature) + '°C')
+        self.label_main.setText(str(self.temperature) + '°C')
 
     def isWaitForSecondHand(self) -> bool:
         return self.isWarningTemp and not self.waitForSecondHand and AdminWindow.getDistance() > constants.DISTANCE_MAX_VALUE and self.isDelayTime()

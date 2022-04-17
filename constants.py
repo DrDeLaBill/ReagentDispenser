@@ -1,5 +1,11 @@
 # App settings
 PASSWORD = "1234"
+FONT_SIZE = 60
+BACKGROUND_COLOR = "background-color: rgb(0, 123, 255);"
+BUTTON_COLOR = 'background-color: rgb(2, 112, 255);'
+IMAGE_WIDTH = 100
+IMAGE_HEIGHT = 100
+QUIT_DELAY = 300  # sec
 
 # Cooler settings
 COOLER_GPIO_PWM_PIN = 19
