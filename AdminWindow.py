@@ -90,13 +90,13 @@ class AdminWindow(Ui_MainWindow):
         # GPIO actions
         while True:
             if self.isAuth:
-                self.workTime = time.time()
-                self.checkTemperature()
-                self.checkLiquidLevel()
-                self.checkDistanceSensor()
                 self.checkQuitDelay()
             else:
                 self.quitDelayTime = time.time()
+            self.workTime = time.time()
+            self.checkTemperature()
+            self.checkLiquidLevel()
+            self.checkDistanceSensor()
 
     def auth(self):
         if self.lineEdit.text() == constants.PASSWORD:
@@ -197,9 +197,7 @@ class AdminWindow(Ui_MainWindow):
             self.label_6.setText("--°C")
 
     def isSmallDistance(self):
-        if self.getSensorDistance() < constants.DISTANCE_MAX_VALUE:
-            return True
-        return False
+        return self.getSensorDistance() < constants.DISTANCE_MAX_VALUE
 
     def getSensorTemperature(self):
         bus = SMBus(1)
