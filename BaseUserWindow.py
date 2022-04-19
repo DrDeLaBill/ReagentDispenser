@@ -37,112 +37,57 @@ class Ui_MainWindow(object):
         self.successBox.setStyleSheet("background-color: rgb(0, 255, 127);")
         self.successBox.setTitle("")
         self.successBox.setObjectName("successBox")
-        self.label_success = QtWidgets.QLabel(self.successBox)
-        self.label_success.setGeometry(QtCore.QRect(
-            0,
-            self.height // 2 - 160,
-            self.width,
-            100
-        ))
-        self.label_success.setAlignment(Qt.Qt.AlignCenter)
-        font = QtGui.QFont()
-        font.setPointSize(constants.FONT_SIZE)
-        self.label_success.setFont(font)
-        self.label_success.setObjectName("label_success")
         self.label_2 = QtWidgets.QLabel(self.successBox)
-        self.label_2.setGeometry(QtCore.QRect(
-            0,
-            self.height // 2 - 50,
-            self.width,
-            100
-        ))
+        self.label_2.setGeometry(QtCore.QRect(0, 10, self.width, self.height-(constants.FONT_SIZE+50)))
+        self.label_2.setWordWrap(True)
         self.label_2.setAlignment(Qt.Qt.AlignCenter)
         font = QtGui.QFont()
         font.setPointSize(constants.FONT_SIZE)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
-        self.label_3 = QtWidgets.QLabel(self.successBox)
-        self.label_3.setGeometry(QtCore.QRect(
-            0,
-            self.height // 2 + 60,
-            self.width,
-            100
-        ))
-        self.label_3.setAlignment(Qt.Qt.AlignCenter)
+        self.label_success = QtWidgets.QLabel(self.successBox)
+        self.label_success.setGeometry(QtCore.QRect(0, self.height-(constants.FONT_SIZE+50), self.width, constants.FONT_SIZE+50))
+        self.label_success.setAlignment(Qt.Qt.AlignCenter)
         font = QtGui.QFont()
         font.setPointSize(constants.FONT_SIZE)
-        self.label_3.setFont(font)
-        self.label_3.setObjectName("label_3")
+        self.label_success.setFont(font)
+        self.label_success.setObjectName("label_success")
+        
         self.mainBox = QtWidgets.QGroupBox(self.centralwidget)
         self.mainBox.setGeometry(QtCore.QRect(0, 0, self.width, self.height))
-        self.mainBox.setStyleSheet("background-color: rgb(255, 255, 0);")
+        self.mainBox.setStyleSheet(constants.USER_BACKGROUND_COLOR)
         self.mainBox.setTitle("")
         self.mainBox.setObjectName("mainBox")
-        self.label_main = QtWidgets.QLabel(self.mainBox)
-        self.label_main.setGeometry(QtCore.QRect(
-            0,
-            self.height // 2 - 160,
-            self.width,
-            100
-        ))
-        self.label_main.setAlignment(Qt.Qt.AlignCenter)
-        font = QtGui.QFont()
-        font.setPointSize(constants.FONT_SIZE)
-        self.label_main.setFont(font)
-        self.label_main.setObjectName("label_main")
         self.label_4 = QtWidgets.QLabel(self.mainBox)
-        self.label_4.setGeometry(QtCore.QRect(
-            0,
-            self.height // 2 - 50,
-            self.width,
-            100
-        ))
-        self.label_4.setAlignment(Qt.Qt.AlignCenter)
+        self.label_4.setGeometry(QtCore.QRect(0, 10, self.width, self.height-(constants.FONT_SIZE+50)))
+        self.label_4.setWordWrap(True)
+        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
         font = QtGui.QFont()
         font.setPointSize(constants.FONT_SIZE)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
+
         self.alertBox = QtWidgets.QGroupBox(self.centralwidget)
         self.alertBox.setGeometry(QtCore.QRect(0, 0, self.width, self.height))
         self.alertBox.setStyleSheet("background-color: rgb(255, 72, 0);")
         self.alertBox.setTitle("")
         self.alertBox.setObjectName("alertBox")
+        self.label_6 = QtWidgets.QLabel(self.alertBox)
+        self.label_6.setGeometry(QtCore.QRect(0, 10, self.width, self.height-(constants.FONT_SIZE+50)))
+        self.label_6.setWordWrap(True)
+        self.label_6.setAlignment(Qt.Qt.AlignCenter)
+        font = QtGui.QFont()
+        font.setPointSize(constants.FONT_SIZE-30)
+        self.label_6.setFont(font)
+        self.label_6.setObjectName("label_6")
         self.label_alert = QtWidgets.QLabel(self.alertBox)
-        self.label_alert.setGeometry(QtCore.QRect(
-            0,
-            self.height // 2 - 160,
-            self.width,
-            100
-        ))
+        self.label_alert.setGeometry(QtCore.QRect(0, self.height-(constants.FONT_SIZE+50), self.width, constants.FONT_SIZE+50))
         self.label_alert.setAlignment(Qt.Qt.AlignCenter)
         font = QtGui.QFont()
         font.setPointSize(constants.FONT_SIZE)
         self.label_alert.setFont(font)
         self.label_alert.setObjectName("label_alert")
-        self.label_6 = QtWidgets.QLabel(self.alertBox)
-        self.label_6.setGeometry(QtCore.QRect(
-            0,
-            self.height // 2 - 50,
-            self.width,
-            100
-        ))
-        self.label_6.setAlignment(Qt.Qt.AlignCenter)
-        font = QtGui.QFont()
-        font.setPointSize(constants.FONT_SIZE)
-        self.label_6.setFont(font)
-        self.label_6.setObjectName("label_6")
-        self.label_7 = QtWidgets.QLabel(self.alertBox)
-        self.label_7.setGeometry(QtCore.QRect(
-            0,
-            self.height // 2 + 60,
-            self.width,
-            100
-        ))
-        self.label_7.setAlignment(Qt.Qt.AlignCenter)
-        font = QtGui.QFont()
-        font.setPointSize(constants.FONT_SIZE)
-        self.label_7.setFont(font)
-        self.label_7.setObjectName("label_7")
+        
         self.warningBox = QtWidgets.QGroupBox(self.centralwidget)
         self.warningBox.setGeometry(QtCore.QRect(0, 0, self.width, self.height))
         self.warningBox.setStyleSheet("background-color: rgb(255, 255, 0);")
@@ -181,16 +126,13 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label_2.setText(_translate("MainWindow", "Проходите!"))
-        self.label_3.setText(_translate("MainWindow", " Будьте здоровы!"))
+        self.label_2.setText(_translate("MainWindow", "Проходите! Будьте здоровы!"))
         self.label_4.setText(_translate("MainWindow", "Поднесите руку к датчику"))
-        self.label_6.setText(_translate("MainWindow", "Высокая температура!"))
-        self.label_7.setText(_translate("MainWindow", "Обратитесь к врачу!"))
+        self.label_6.setText(_translate("MainWindow", "Высокая температура! Обратитесь к врачу!"))
         self.label_5.setText(_translate("MainWindow", "Поднесите другую руку"))
-        self.label_success.setText(_translate("MainWindow", "--°C"))
-        self.label_main.setText(_translate("MainWindow", "--°C"))
-        self.label_alert.setText(_translate("MainWindow", "--°C"))
-        self.label_warning.setText(_translate("MainWindow", "--°C"))
+        self.label_success.setText(_translate("MainWindow", ""))
+        self.label_alert.setText(_translate("MainWindow", ""))
+        self.label_warning.setText(_translate("MainWindow", ""))
 
     def showMainScreen(self):
         self.hideAll()

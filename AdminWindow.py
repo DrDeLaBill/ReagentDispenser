@@ -2,6 +2,7 @@ import threading
 import time
 
 import subprocess
+import os
 import RPi.GPIO as GPIO
 from smbus2 import SMBus
 from mlx90614 import MLX90614
@@ -26,6 +27,7 @@ class AdminWindow(Ui_MainWindow):
         self.dispenserDelayTime = 0
         # Temperature
         self.temperatureSensorInWork = False
+        self.lastTempTime = 0
         # Main
         self.workTime = time.time()
         self.quitDelayTime = time.time()
@@ -72,34 +74,34 @@ class AdminWindow(Ui_MainWindow):
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
         # Cooler settings
-        GPIO.setup(constants.COOLER_GPIO_PWM_PIN, GPIO.OUT)
+        GPIO.setup(constants.COOLER_GPIO_PWM_PIN, GPIO.OUT, initial=GPIO.LOW)
         self.coolerPWM = GPIO.PWM(constants.COOLER_GPIO_PWM_PIN, constants.COOLER_PWM_FREQ)
         # Dispenser
-        GPIO.setup(constants.DISPENSER_GPIO_PIN, GPIO.OUT)
+        GPIO.setup(constants.DISPENSER_GPIO_PIN, GPIO.OUT, initial=GPIO.LOW)
         # Distance
-        GPIO.setup(constants.DISTANCE_GPIO_TRIGGER_PIN, GPIO.OUT)
+        GPIO.setup(constants.DISTANCE_GPIO_TRIGGER_PIN, GPIO.OUT, initial=GPIO.LOW)
         GPIO.setup(constants.DISTANCE_GPIO_ECHO_PIN, GPIO.IN)
         # Pump
         GPIO.setup(constants.LIQUID_FULL_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(constants.LIQUID_EMPTY_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.setup(constants.LIQUID_MAIN_TANK_PIN.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.setup(constants.LIQUID_PUMP_PIN, GPIO.OUT)
-        AdminWindow.workStatus = True
+        GPIO.setup(constants.LIQUID_MAIN_TANK_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(constants.LIQUID_PUMP_PIN, GPIO.OUT, initial=GPIO.LOW)
+        # AdminWindow.workStatus = True
 
     def loopUi(self):
         # GPIO actions
         while True:
             if self.isAuth:
+                self.workTime = time.time()
+                self.checkTemperature()
+                self.checkLiquidLevel()
                 self.checkQuitDelay()
             else:
                 self.quitDelayTime = time.time()
-            self.workTime = time.time()
-            self.checkTemperature()
-            self.checkLiquidLevel()
-            self.checkDistanceSensor()
 
     def auth(self):
         if self.lineEdit.text() == constants.PASSWORD:
+            self.lineEdit.setText("")
             self.isAuth = True
             self.showMainWindow()
 
@@ -120,14 +122,19 @@ class AdminWindow(Ui_MainWindow):
     def switchTemperatureAction(self):
         if self.switchTemperature.dPtr.position:
             self.temperatureSensorInWork = False
+            AdminWindow.workStatus = False
         else:
             self.temperatureSensorInWork = True
+            AdminWindow.workStatus = True
 
     def switchReagentAction(self):
         if self.switchReagent.dPtr.position:
             self.dispenserEnable = False
+            self.dispenserOff()
         else:
             self.dispenserEnable = True
+            self.dispenserOn()
+
 
     def dispenserTurnOn(self):
         if self.coolerSlider.value() > 0 and self.dispenserEnable:
@@ -183,38 +190,48 @@ class AdminWindow(Ui_MainWindow):
         return distance
 
     def isNotTimeout(self):
-        return time.time() - self.workTime < 0.5
+        return time.time() - self.workTime < 0.05
 
     def checkDistanceSensor(self):
-        if self.isSmallDistance():
-            self.dispenserTurnOn()
+        #if self.isSmallDistance():
+        #    self.dispenserTurnOn()
+        return
 
     def checkTemperature(self):
         if self.isSmallDistance() and self.temperatureSensorInWork:
-            self.label_6.setText("{:.1f}°C".format(self.getSensorTemperature()))
+            self.getSensorTemperature()
+            if time.time() - self.lastTempTime >= constants.TEMPERATURE_DELAY:
+                self.showTempTime = time.time()
+                self.label_6.setText("{:.1f}°C".format(AdminWindow.temperature))
         else:
-            self.temperature = 0.0
+            AdminWindow.temperature = 0.0
             self.label_6.setText("--°C")
 
     def isSmallDistance(self):
-        return self.getSensorDistance() < constants.DISTANCE_MAX_VALUE
+        if self.getSensorDistance() < constants.DISTANCE_MAX_VALUE:
+            return True
+        return False
 
     def getSensorTemperature(self):
         bus = SMBus(1)
         sensor = MLX90614(bus, address=constants.TEMPERATURE_SENSOR_CHANNEL)
         try:
-            temperature = sensor.get_object_1()
+            summ = 0
+            for i in range(20):
+                summ += sensor.get_object_1()
+                time.sleep(0.01)
+
+            AdminWindow.temperature = summ / 20
             bus.close()
-            AdminWindow.temperature = temperature
-            return temperature
+            return AdminWindow.temperature
         except Exception:
             return "ERR"
 
     def checkLiquidLevel(self):
-        mainTankState = GPIO.input(constants.LIQUID_MAIN_TANK_PIN) == 1
-        if GPIO.input(constants.LIQUID_FULL_PIN) == 1:
+        mainTankState = GPIO.input(constants.LIQUID_MAIN_TANK_PIN) == GPIO.HIGH
+        if GPIO.input(constants.LIQUID_FULL_PIN) == GPIO.LOW:
             GPIO.output(constants.LIQUID_PUMP_PIN, GPIO.LOW)
-        elif GPIO.input(constants.LIQUID_EMPTY_PIN) == 1 and mainTankState:
+        elif GPIO.input(constants.LIQUID_EMPTY_PIN) == GPIO.LOW and mainTankState:
             GPIO.output(constants.LIQUID_PUMP_PIN, GPIO.HIGH)
         elif mainTankState:
             self.label_7.show()
@@ -228,14 +245,10 @@ class AdminWindow(Ui_MainWindow):
 
     @staticmethod
     def getDistance():
-        if AdminWindow.distance <= 0.4:
-            return 999.9
         return AdminWindow.distance
 
     @staticmethod
     def getTemperature():
-        if AdminWindow.distance <= 0.1:
-            return 0.0
         return AdminWindow.temperature
 
     @staticmethod
@@ -247,7 +260,7 @@ class AdminWindow(Ui_MainWindow):
 
     def shutdown(self):
         print('shutdown')
-        subprocess.run('sudo shutdown -h now')
+        os.system('sudo shutdown -h now')
 
     def b0Action(self):
         self.appendSignInLine('0')

@@ -26,7 +26,7 @@ class Ui_MainWindow(object):
         MainWindow.resize(self.height, self.width)
         # Main window
         self.centralwidget = QtWidgets.QWidget(MainWindow)
-        self.centralwidget.setStyleSheet(constants.BACKGROUND_COLOR)
+        self.centralwidget.setStyleSheet(constants.ADMIN_BACKGROUND_COLOR)
         self.centralwidget.setObjectName("centralwidget")
         self.groupOperator = QtWidgets.QGroupBox(self.centralwidget)
         self.groupOperator.setGeometry(QtCore.QRect(
@@ -175,7 +175,7 @@ class Ui_MainWindow(object):
         self.bConfirmOk.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.bConfirmOk.setFont(font)
         self.bConfirmOk.setObjectName("bConfirmOk")
-        self.bConfirmOk.setStyleSheet(constants.BACKGROUND_COLOR)
+        self.bConfirmOk.setStyleSheet(constants.ADMIN_BACKGROUND_COLOR)
         self.bConfirmOk.setGeometry(QtCore.QRect(275, 75, 100, 50))
 
         self.bCancel = QtWidgets.QPushButton(self.groupConfirm)
@@ -184,7 +184,7 @@ class Ui_MainWindow(object):
         self.bCancel.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.bCancel.setFont(font)
         self.bCancel.setObjectName("bCancel")
-        self.bCancel.setStyleSheet(constants.BACKGROUND_COLOR)
+        self.bCancel.setStyleSheet(constants.ADMIN_BACKGROUND_COLOR)
         self.bCancel.setGeometry(QtCore.QRect(25, 75, 100, 50))
 
         # Password window
@@ -229,7 +229,7 @@ class Ui_MainWindow(object):
         font.setPointSize(25)
         self.b5.setFont(font)
         self.b5.setObjectName("b5")
-        self.b5.setStyleSheet(constants.BACKGROUND_COLOR)
+        self.b5.setStyleSheet(constants.ADMIN_BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b5, 2, 1, 1, 1)
 
         self.b4 = QtWidgets.QPushButton(self.verticalLayoutWidget)
@@ -237,7 +237,7 @@ class Ui_MainWindow(object):
         font.setPointSize(25)
         self.b4.setFont(font)
         self.b4.setObjectName("b4")
-        self.b4.setStyleSheet(constants.BACKGROUND_COLOR)
+        self.b4.setStyleSheet(constants.ADMIN_BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b4, 2, 0, 1, 1)
 
         self.b2 = QtWidgets.QPushButton(self.verticalLayoutWidget)
@@ -245,7 +245,7 @@ class Ui_MainWindow(object):
         font.setPointSize(25)
         self.b2.setFont(font)
         self.b2.setObjectName("b2")
-        self.b2.setStyleSheet(constants.BACKGROUND_COLOR)
+        self.b2.setStyleSheet(constants.ADMIN_BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b2, 1, 1, 1, 1)
 
         self.b0 = QtWidgets.QPushButton(self.verticalLayoutWidget)
@@ -253,7 +253,7 @@ class Ui_MainWindow(object):
         font.setPointSize(25)
         self.b0.setFont(font)
         self.b0.setObjectName("b0")
-        self.b0.setStyleSheet(constants.BACKGROUND_COLOR)
+        self.b0.setStyleSheet(constants.ADMIN_BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b0, 5, 1, 1, 1)
 
         self.bDel = QtWidgets.QPushButton(self.verticalLayoutWidget)
@@ -261,7 +261,7 @@ class Ui_MainWindow(object):
         font.setPointSize(25)
         self.bDel.setFont(font)
         self.bDel.setObjectName("bDel")
-        self.bDel.setStyleSheet(constants.BACKGROUND_COLOR)
+        self.bDel.setStyleSheet(constants.ADMIN_BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.bDel, 5, 0, 1, 1)
 
         self.bOK = QtWidgets.QPushButton(self.verticalLayoutWidget)
@@ -269,7 +269,7 @@ class Ui_MainWindow(object):
         font.setPointSize(25)
         self.bOK.setFont(font)
         self.bOK.setObjectName("bOK")
-        self.bOK.setStyleSheet(constants.BACKGROUND_COLOR)
+        self.bOK.setStyleSheet(constants.ADMIN_BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.bOK, 5, 2, 1, 1)
 
         self.b8 = QtWidgets.QPushButton(self.verticalLayoutWidget)
@@ -277,7 +277,7 @@ class Ui_MainWindow(object):
         font.setPointSize(25)
         self.b8.setFont(font)
         self.b8.setObjectName("b8")
-        self.b8.setStyleSheet(constants.BACKGROUND_COLOR)
+        self.b8.setStyleSheet(constants.ADMIN_BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b8, 4, 1, 1, 1)
 
         self.b3 = QtWidgets.QPushButton(self.verticalLayoutWidget)
@@ -285,7 +285,7 @@ class Ui_MainWindow(object):
         font.setPointSize(25)
         self.b3.setFont(font)
         self.b3.setObjectName("b3")
-        self.b3.setStyleSheet(constants.BACKGROUND_COLOR)
+        self.b3.setStyleSheet(constants.ADMIN_BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b3, 1, 2, 1, 1)
 
         self.b9 = QtWidgets.QPushButton(self.verticalLayoutWidget)
@@ -293,7 +293,7 @@ class Ui_MainWindow(object):
         font.setPointSize(25)
         self.b9.setFont(font)
         self.b9.setObjectName("b9")
-        self.b9.setStyleSheet(constants.BACKGROUND_COLOR)
+        self.b9.setStyleSheet(constants.ADMIN_BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b9, 4, 2, 1, 1)
 
         self.b1 = QtWidgets.QPushButton(self.verticalLayoutWidget)
@@ -301,7 +301,7 @@ class Ui_MainWindow(object):
         font.setPointSize(25)
         self.b1.setFont(font)
         self.b1.setObjectName("b1")
-        self.b1.setStyleSheet(constants.BACKGROUND_COLOR)
+        self.b1.setStyleSheet(constants.ADMIN_BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b1, 1, 0, 1, 1)
 
         self.b6 = QtWidgets.QPushButton(self.verticalLayoutWidget)
@@ -309,7 +309,7 @@ class Ui_MainWindow(object):
         font.setPointSize(25)
         self.b6.setFont(font)
         self.b6.setObjectName("b6")
-        self.b6.setStyleSheet(constants.BACKGROUND_COLOR)
+        self.b6.setStyleSheet(constants.ADMIN_BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b6, 2, 2, 1, 1)
 
         self.b7 = QtWidgets.QPushButton(self.verticalLayoutWidget)
@@ -317,7 +317,7 @@ class Ui_MainWindow(object):
         font.setPointSize(25)
         self.b7.setFont(font)
         self.b7.setObjectName("b7")
-        self.b7.setStyleSheet(constants.BACKGROUND_COLOR)
+        self.b7.setStyleSheet(constants.ADMIN_BACKGROUND_COLOR)
         self.gridLayout_2.addWidget(self.b7, 4, 0, 1, 1)
 
         self.verticalLayout.addLayout(self.gridLayout_2)
